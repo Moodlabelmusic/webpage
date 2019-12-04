@@ -1,10 +1,10 @@
 import React from "react";
 import { Container } from "reactstrap";
 
-const bannerImages = [
-  "assets/img/header1.jpg",
-  "assets/img/header2.jpg"
-]
+// const bannerImages = [
+//   "assets/img/header1.jpg",
+//   "assets/img/header2.jpg"
+// ]
 
 function Header() {
   let backgroundImage = require("assets/img/header1.jpg");

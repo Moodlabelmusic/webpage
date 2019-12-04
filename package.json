@@ -1,6 +1,7 @@
 {
   "name": "moodlabelmusic",
   "version": "1.0.0",
+  "homepage": ".",
   "private": true,
   "dependencies": {
     "classnames": "2.2.6",

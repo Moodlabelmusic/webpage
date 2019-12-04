@@ -1,0 +1,18 @@
+{
+  "files": {
+    "main.css": "/static/css/main.241949ac.chunk.css",
+    "main.js": "/static/js/main.98c8a7ad.chunk.js",
+    "main.js.map": "/static/js/main.98c8a7ad.chunk.js.map",
+    "runtime~main.js": "/static/js/runtime~main.a8a9905a.js",
+    "runtime~main.js.map": "/static/js/runtime~main.a8a9905a.js.map",
+    "static/js/2.9083e486.chunk.js": "/static/js/2.9083e486.chunk.js",
+    "static/js/2.9083e486.chunk.js.map": "/static/js/2.9083e486.chunk.js.map",
+    "index.html": "/index.html",
+    "precache-manifest.a5158236f79b7ef5f9e50e31bbc629c1.js": "/precache-manifest.a5158236f79b7ef5f9e50e31bbc629c1.js",
+    "service-worker.js": "/service-worker.js",
+    "static/css/main.241949ac.chunk.css.map": "/static/css/main.241949ac.chunk.css.map",
+    "static/media/header1.jpg": "/static/media/header1.11d20ea0.jpg",
+    "static/media/mood-label-music-blanco.png": "/static/media/mood-label-music-blanco.f24e86d4.png",
+    "static/media/paper-kit.scss": "/static/media/nucleo-icons.f32ed5ad.eot"
+  }
+}

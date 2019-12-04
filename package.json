@@ -1,7 +1,6 @@
 {
   "name": "moodlabelmusic",
   "version": "1.0.0",
-  "homepage": "https://minmiguelm.github.io/moodlabelmusic",
   "private": true,
   "dependencies": {
     "classnames": "2.2.6",

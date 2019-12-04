@@ -10,7 +10,7 @@ import "assets/css/main.css";
 import Index from "views/Index.js";
 
 ReactDOM.render(
-  <BrowserRouter>
+  <BrowserRouter basename="/moodlabelmusic">
     <Switch>
       <Route path="/" render={props => <Index {...props} />} />
       <Redirect to="/" />

@@ -1,3 +1,25 @@
+/* #eQ1qAt2nzxHFY7IY::before{
+  content: attr(data);
+  width: 100px;
+  height: 20px;
+  line-height: 20px;
+  font-family:YAFdJsjyMsM-0;
+  text-align: center;
+  display: block;
+  border-radius: 50%;
+  background: rgb(67, 151, 232);
+  border: 1px solid #FFF;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.4);
+  color: #FFF;
+  position: absolute;
+}
+#eQ1qAt2nzxHFY7IY.bottom-right::before {
+  left: auto;
+  top: auto;
+  right: -56px;
+  bottom: -21px;
+} */
+
 :root {
   --ffsd: 0px;
   --1vw: calc((100vw - var(--sbw, 0px)) / 100);

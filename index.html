@@ -2,35 +2,249 @@
 
 <head>
   <base href=".">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Juan Camilo Méndez</title>
   <link rel="stylesheet" href="styles.css">
+
+  <noscript>
+    <style>
+      @keyframes pulse {}
+
+      .animated {
+        animation-play-state: running !important;
+      }
+    </style>
+  </noscript>
+  <script nonce='933fa88d-7179-4868-a90f-b894c84eef79'>
+    !function () {
+      "use strict";
+      function t(t, n) {
+        let e;
+        return (...o) => {
+          clearTimeout(e),
+            e = setTimeout((() => {
+              t(...o)
+            }), n)
+        }
+      }
+      class n {
+        constructor() {
+          this.callbacks = [],
+            window.addEventListener("DOMContentLoaded", (() => this.onDOMContentLoaded()))
+        }
+        onDOMContentLoaded() {
+          this.callbacks.sort(((t, n) => t.priority - n.priority)).forEach((({ callback: t }) => t()))
+        }
+        runOnLoad(t) {
+          "loading" === document.readyState ? this.callbacks.push(t) : t.callback()
+        }
+      }
+      function e(t, e = Number.MAX_VALUE) {
+        var o;
+        (window.canva_scriptExecutor = null !== (o = window.canva_scriptExecutor) && void 0 !== o ? o : new n).runOnLoad({
+          callback: t,
+          priority: e
+        })
+      }
+      class o {
+        constructor(t) {
+          this.items = [],
+            this.previousWidth = document.documentElement.clientWidth,
+            this.previousHeight = window.innerHeight;
+          const n = t((() => this.onWindowResize()), 100);
+          window.addEventListener("resize", n)
+        }
+        onWindowResize() {
+          const t = document.documentElement.clientWidth,
+            n = window.innerHeight,
+            e = this.previousWidth !== t,
+            o = this.previousHeight !== n;
+          this.items.forEach((t => {
+            const n = () => {
+              t.callback(),
+                t.executed = !0
+            };
+            (!t.executed || e && t.options.runOnWidthChange || o && t.options.runOnHeightChange) && n()
+          })),
+            this.previousWidth = t,
+            this.previousHeight = n
+        }
+        runOnResize(t, n) {
+          this.items.push({
+            callback: t,
+            options: n,
+            executed: n.runOnLoad
+          }),
+            this.items.sort(((t, n) => t.options.priority - n.options.priority)),
+            n.runOnLoad && e(t, n.priority)
+        }
+      }
+      function i(n, e, i = t) {
+        var r;
+        (window.canva_debounceResize = null !== (r = window.canva_debounceResize) && void 0 !== r ? r : new o(i)).runOnResize(n, {
+          runOnLoad: !1,
+          runOnWidthChange: !0,
+          runOnHeightChange: !1,
+          priority: Number.MAX_VALUE,
+          ...e
+        })
+      }
+      const r = "--minfs",
+        c = "--rzf",
+        u = "--rfso",
+        s = "--bfso";
+      function a(t, n, e = .001) {
+        return Math.abs(t - n) < e
+      }
+      function d(t, n) {
+        return window.getComputedStyle(t).getPropertyValue(n)
+      }
+      function l(t, n, e) {
+        t.style.setProperty(n, e)
+      }
+      function m(t, n) {
+        const e = document.createElement("div");
+        e.style.setProperty(t, n),
+          document.body.append(e);
+        const o = d(e, t);
+        return e.remove(), o
+      }
+      function f() {
+        const t = function () {
+          const t = parseFloat(m("font-size", "0.1px"));
+          return t > 1 ? t : 0
+        }(),
+          n = function (t) {
+            const n = 2 * Math.max(t, 1);
+            return n / parseFloat(m("font-size", `${n}px`))
+          }(t);
+        if (function (t) {
+          if (0 === t)
+            return;
+          l(document.documentElement, r, `${t}px`),
+            i((() => {
+              const n = 100 * t,
+                { clientWidth: e } = document.documentElement;
+              l(document.documentElement, c, n > e ? (e / n).toPrecision(4) : null)
+            }), {
+              runOnLoad: !0
+            })
+        }(t * Math.max(1, n)), a(n, 1))
+          return;
+        const e = a(parseFloat(d(document.documentElement, "font-size")), parseFloat(m("grid-template-columns", "1rem")));
+        l(document.documentElement, e ? u : s, n.toPrecision(4))
+      }
+      function h() {
+        document.querySelectorAll("img, image, video, svg").forEach((t => t.addEventListener("contextmenu", (t => t.preventDefault()))))
+      }
+      const p = "--sbw",
+        g = "--inner1Vh";
+      function w(t, n, e) {
+        t.style.setProperty(n, e)
+      }
+      function v() {
+        w(document.documentElement, g, window.innerHeight / 100 + "px"),
+          function () {
+            const t = window.innerWidth - document.documentElement.clientWidth;
+            w(document.documentElement, p, t >= 0 ? `${t}px` : null)
+          }()
+      }
+      var y;
+      const E = "undefined" != typeof window ? null === (y = window.navigator) || void 0 === y ? void 0 : y.userAgent : void 0;
+      const b = !(!E || (O = E, !O.match(/AppleWebKit\//) || O.match(/Chrome\//) || O.match(/Chromium\//)));
+      var O;
+      function L() {
+        document.querySelectorAll("svg").forEach((t => t.style.background = "url('data:image/png;base64,')"))
+      }
+      let x;
+      function A() {
+        x || (x = Array.from(document.querySelectorAll("foreignObject")).filter((t => 0 === t.getBoundingClientRect().width)));
+        const t = function () {
+          const t = document.createElement("div");
+          t.style.fontSize = "100vw",
+            document.body.append(t);
+          const n = parseFloat(window.getComputedStyle(t).fontSize);
+          return t.remove(), n / window.innerWidth
+        }();
+        Array.from(x).forEach((n => function (t) {
+          return new Promise(((n, e) => {
+            const o = t.querySelector("img");
+            o && !o.complete ? (o.addEventListener("load", (() => n())), o.addEventListener("error", (() => e()))) : n()
+          }))
+        }(n).finally((() => function (t, n) {
+          const e = Array.from(t.children);
+          e.forEach(((t, n) => {
+            if (t.hasAttribute("data-foreign-object-container"))
+              t.style.transformOrigin = "",
+                t.style.transform = "";
+            else {
+              const o = document.createElement("div");
+              o.setAttribute("data-foreign-object-container", ""),
+                t.insertAdjacentElement("beforebegin", o),
+                t.remove(),
+                o.append(t),
+                e[n] = o
+            }
+          }));
+          const o = t.getScreenCTM();
+          if (!o)
+            return;
+          const { a: i, b: r, c: c, d: u } = o.scale(n);
+          e.forEach((t => {
+            if (!t.hasAttribute("data-foreign-object-container"))
+              return;
+            const { style: n } = t;
+            n.transformOrigin = "0px 0px",
+              n.transform = `matrix(${i}, ${r}, ${c}, ${u}, 0, 0)`
+          }))
+        }(n, t)))))
+      }
+      [function () {
+        e(f)
+      }, function () {
+        i(v, {
+          runOnLoad: !0,
+          runOnHeightChange: !0,
+          priority: 1
+        })
+      }, function () {
+        b && i(A, {
+          runOnLoad: !0
+        })
+      }, function () {
+        b && e(L)
+      }, function () {
+        e(h)
+      }].forEach((t => t()))
+    }();
+  </script>
 </head>
 
 <body>
   <div id="root">
     <a id="page-1" aria-hidden="true" style="visibility:hidden;"></a>
-    <section id="UpoxW35PeJsmBlyg"
+    <section id="HHW7aIdgEbPxRB6x"
       style="position:relative;overflow:hidden;display:grid;align-items:center;grid-template-columns:auto 100rem auto;z-index:0;">
-      <div id="ZdhWwkIAytg27AdG"
+      <div id="vnYiVOGnG9InPwMC"
         style="grid-area:1 / 1 / 2 / 4;display:grid;position:absolute;min-height:100%;min-width:100%;">
-        <div id="dq8bjg0bnnF13TEO" style="z-index:0;">
-          <div id="govWfRrC8TC1qSF2" style="box-sizing:border-box;width:100%;height:100%;transform:rotate(0deg);">
-            <div id="OPhZoEQtWv7PlITp" style="width:100%;height:100%;opacity:1.0;">
-              <div id="s3c9Ot5vZlNHX0h9"
+        <div id="oN2crJJNvdvDjC45" style="z-index:0;">
+          <div id="uZvTOQckGEE5Et5G" style="box-sizing:border-box;width:100%;height:100%;transform:rotate(0deg);">
+            <div id="FZALtm5yKBOzn5cf" style="width:100%;height:100%;opacity:1.0;">
+              <div id="QlJzgu23EouLjc8x"
                 style="background-color:#000000;opacity:1.0;transform:scale(1, 1);width:100%;height:100%;overflow:hidden;position:relative;">
               </div>
             </div>
           </div>
         </div>
-        <div id="s5qRNMIrpSogytOg" style="z-index:1;">
-          <div id="G8BFGozNKQZoXCky" style="box-sizing:border-box;width:100%;height:100%;transform:rotate(0deg);">
-            <div id="vQTGAQhIqZiE3xva" style="width:100%;height:100%;opacity:0.21;">
-              <div id="OYZF5h66bjmpitO4"
+        <div id="tcHy3BVVZ0wib9rP" style="z-index:1;">
+          <div id="ZAQ2QzZd9T51znFs" style="box-sizing:border-box;width:100%;height:100%;transform:rotate(0deg);">
+            <div id="P0aTiuIDPxycGCBT" style="width:100%;height:100%;opacity:0.21;">
+              <div id="R2MXLWz9AEProidX"
                 style="transform:scale(1, 1);width:100%;height:100%;overflow:hidden;position:relative;">
-                <div id="GFKUhILJkcMamHhj"
-                  style="width: calc(100% * max(1, var(--scale-fill, 1))); height: calc(133.33333333% / min(1, var(--scale-fill, 1))); position: absolute; top: 50%; left: 50%; opacity: 1; animation: auto ease 0s 1 normal none running none;">
-                  <img src="./images/7d73fdf1176709c26c909877f071abf9.jpg" loading="lazy"
+                <div id="iJ7LTxFI88tyitpN"
+                  style="width:calc(100% * max(1, var(--scale-fill, 1)));height:calc(133.33333333% / min(1, var(--scale-fill, 1)));position:absolute;top:50%;left:50%;opacity:1.0;animation:pulse 1.5s ease-in-out infinite;">
+                  <img src="images/7d73fdf1176709c26c909877f071abf9.jpg" loading="lazy"
                     srcset="images/fd090418b7b4f1f6c936ee1af13056be.jpg 820w, images/7d73fdf1176709c26c909877f071abf9.jpg 1640w"
                     sizes="(max-width: 375px) 142.6902339vw, (min-width: 375.05px) and (max-width: 480px) 132.09499003vw, (min-width: 480.05px) and (max-width: 768px) 117.68315872vw, (min-width: 768.05px) and (max-width: 1024px) 111.82607738vw, (min-width: 1024.05px) 100vw"
                     style="width:100%;height:100%;display:block;object-fit:cover;object-position:50% 50%;transform:translate(-50%, -50%) rotate(0deg);">
@@ -40,20 +254,20 @@
           </div>
         </div>
       </div>
-      <div id="PN7v0omOMo50Cbq3" style="display:grid;position:relative;grid-area:1 / 2 / 2 / 3;">
-        <div id="PNhJWMttwToMFDBq">
-          <div id="Xr4lcxE8hmXNwKx2" style="display:grid;position:relative;grid-area:2 / 2 / 5 / 6;">
-            <div id="bH6SmIcugR3vLFIp" style="display:grid;position:relative;grid-area:2 / 2 / 3 / 3;">
-              <div id="uZ8J3CKI692t4f7j" style="z-index:3;">
-                <div id="WEfat8vT280p0xub" style="padding-top:50.33743465%;transform:rotate(0deg);">
-                  <div id="e0FG92pxsEN0Jc1m" style="position:absolute;top:0px;left:0px;width:100%;height:100%;">
-                    <div id="DneQTOUVvKcyxmM7" style="width:100%;height:100%;opacity:1.0;">
-                      <div id="s5YaoX1vKaFE3jNo"
+      <div id="JzvrA37GdKtAK0F2" style="display:grid;position:relative;grid-area:1 / 2 / 2 / 3;">
+        <div id="fj0eK7aWlmcLFGDZ">
+          <div id="eNbd4KFjimnLYmKy" style="display:grid;position:relative;grid-area:2 / 2 / 5 / 6;">
+            <div id="j2plntkhCE8hCZga" style="display:grid;position:relative;grid-area:2 / 2 / 3 / 3;">
+              <div id="VPGg9JnH1hUI2DwX" style="z-index:3;">
+                <div id="dyKrO4IdcINPwkEm" style="padding-top:50.33743465%;transform:rotate(0deg);">
+                  <div id="LQ5ozPdv4OLqMZyx" style="position:absolute;top:0px;left:0px;width:100%;height:100%;">
+                    <div id="qcLCBM18ZiqD6Bfl" style="width:100%;height:100%;opacity:1.0;">
+                      <div id="lPw41BQ1ouf978hq"
                         style="transform:scale(1, 1);width:100%;height:100%;overflow:hidden;position:relative;">
-                        <div id="Qd576D72NUk2kUmc"
-                          style="width: calc(100% * max(1, var(--scale-fill, 1))); height: calc(148.92176628% / min(1, var(--scale-fill, 1))); position: absolute; top: 50%; left: 50%; opacity: 1; animation: auto ease 0s 1 normal none running none;">
-                          <img src="./images/0ec22aa0f45d086db0cdc29d08f647fa.jpg" loading="lazy"
-                            srcset="images/0ec22aa0f45d086db0cdc29d08f647fa.jpg 820w, images/0ec22aa0f45d086db0cdc29d08f647fa.jpg 1640w"
+                        <div id="jxkqtGLOiFO5Rsc3"
+                          style="width:calc(100% * max(1, var(--scale-fill, 1)));height:calc(148.92176628% / min(1, var(--scale-fill, 1)));position:absolute;top:50%;left:50%;opacity:1.0;animation:pulse 1.5s ease-in-out infinite;">
+                          <img src="images/0ec22aa0f45d086db0cdc29d08f647fa.jpg" loading="lazy"
+                            srcset="images/4311349da5e269b4edca1b4b469da35d.jpg 820w, images/0ec22aa0f45d086db0cdc29d08f647fa.jpg 1640w"
                             sizes="(max-width: 375px) 89.73992597vw, (min-width: 375.05px) and (max-width: 480px) 91.57135303vw, (min-width: 480.05px) and (max-width: 768px) 89.9361503vw, (min-width: 768.05px) and (max-width: 1024px) 91.98015371vw, (min-width: 1024.05px) 90.12181201vw"
                             style="width:100%;height:100%;display:block;object-fit:cover;object-position:50% 50%;transform:translate(-50%, -50%) rotate(0deg);">
                         </div>
@@ -62,19 +276,18 @@
                   </div>
                 </div>
               </div>
-              <div id="zRrCc82WHG2iIMkq" style="z-index:22;">
-                <div id="pPcoSOGiXTRRRSeu" style="padding-top:99.9996%;transform:rotate(0deg);">
-                  <div id="HWPecjXFlAOYryDw" style="position:absolute;top:0px;left:0px;width:100%;height:100%;">
-                    <svg id="EOu1hs6aMYReAKF7" viewBox="0 0 500.0 499.998"
-                      style="width:100%;height:100%;opacity:1.0;overflow:hidden;position:absolute;top:0%;left:0%;background:url(&#39;data:image/png;base64,&#39;);">
-                      <g id="ErHUOgJKMrwusPAH" style="transform:scale(1, 1);">
-                        <foreignobject id="vEiQJddGENZB8faZ" style="width:500px;height:499.998px;">
-                          <div id="eMNhTLuapoCF4RPa"
-                            style="clip-path:path(&#39;M500,250.0019989 C500,388.0670166 388.06900024,499.99801636 250,499.99801636 C111.92900085,499.99801636 0,388.0670166 0,250.0019989 C0,111.93000031 111.92900085,0 250,0 C388.0710144,0 500,111.93000031 500,250.0019989 Z&#39;);">
-                            <div id="gffov4VvHre4nlAi"
-                              style="transform: scale(1, 1); transform-origin: 250px 250px; animation: auto ease 0s 1 normal none running none;">
-                              <img src="./images/7d73fdf1176709c26c909877f071abf9.jpg" loading="lazy"
-                                srcset="images/7d73fdf1176709c26c909877f071abf9.jpg 820w, images/7d73fdf1176709c26c909877f071abf9.jpg 1640w"
+              <div id="mi79DjanMrpYx4zE" style="z-index:22;">
+                <div id="QjTX8HuMTzzrnbop" style="padding-top:99.9996%;transform:rotate(0deg);">
+                  <div id="Eg8Pts4pa9xVX7y4" style="position:absolute;top:0px;left:0px;width:100%;height:100%;">
+                    <svg id="B2JrolxT4cPFl4S6" viewBox="0 0 500.0 499.998"
+                      style="width:100%;height:100%;opacity:1.0;overflow:hidden;position:absolute;top:0%;left:0%;background:url(&#x27;data:image/png;base64,&#x27;);">
+                      <g id="l143ZTm4Br3Hzb9v" style="transform:scale(1, 1);">
+                        <foreignobject id="KyOoZptDnbq2cyYV" style="width:500px;height:499.998px;">
+                          <div id="SU5nTwI1iOAVh1gG"
+                            style="clip-path:path(&#x27;M500,250.0019989 C500,388.0670166 388.06900024,499.99801636 250,499.99801636 C111.92900085,499.99801636 0,388.0670166 0,250.0019989 C0,111.93000031 111.92900085,0 250,0 C388.0710144,0 500,111.93000031 500,250.0019989 Z&#x27;);">
+                            <div id="hMb8gZZNWRA7weTD" style="transform:scale(1, 1);transform-origin:250px 250px;">
+                              <img src="images/7d73fdf1176709c26c909877f071abf9.jpg" loading="lazy"
+                                srcset="images/fd090418b7b4f1f6c936ee1af13056be.jpg 820w, images/7d73fdf1176709c26c909877f071abf9.jpg 1640w"
                                 sizes="(max-width: 375px) 33.99565871vw, (min-width: 375.05px) and (max-width: 480px) 34.68944766vw, (min-width: 480.05px) and (max-width: 768px) 34.06999324vw, (min-width: 768.05px) and (max-width: 1024px) 34.84431127vw, (min-width: 1024.05px) 34.1403264vw"
                                 style="transform:translate(-83.49475977px, 0px) rotate(0deg);transform-origin:333.49475977px 249.999px;width:666.98951953px;height:499.998px;display:block;opacity:1.0;object-fit:fill;">
                             </div>
@@ -85,17 +298,17 @@
                   </div>
                 </div>
               </div>
-              <div id="qbvPKT4ypy2qUQQR" style="display:grid;position:relative;grid-area:14 / 5 / 15 / 6;">
-                <div id="aGHsMhmKw83RPXGf" style="z-index:24;">
-                  <div id="Do89pRrv8JSWYRNq" style="padding-top:100%;transform:rotate(0deg);">
-                    <div id="aJ13eGRJpZEdlRC2" style="position:absolute;top:0px;left:0px;width:100%;height:100%;">
-                      <div id="jtJibdClgFDKdqce" style="width:100%;height:100%;opacity:1.0;">
-                        <div id="jgpfRnzjtRneia3G"
+              <div id="Bl5UW1CzLtUfk4rm" style="display:grid;position:relative;grid-area:14 / 5 / 15 / 6;">
+                <div id="bkZspp5Ktkk1Em7P" style="z-index:24;">
+                  <div id="z5EhmUbswYa0jsPC" style="padding-top:100%;transform:rotate(0deg);">
+                    <div id="eIsr2w3QYUCEnl8R" style="position:absolute;top:0px;left:0px;width:100%;height:100%;">
+                      <div id="Te8OKlxzeNCXPZ1d" style="width:100%;height:100%;opacity:1.0;">
+                        <div id="QHPhdKJ61bwl9LkX"
                           style="transform:scale(1, 1);width:100%;height:100%;overflow:hidden;position:relative;">
-                          <div id="pjjq957WPc81mJhk"
-                            style="width: calc(100% * max(1, var(--scale-fill, 1))); height: calc(100% / min(1, var(--scale-fill, 1))); position: absolute; top: 50%; left: 50%; opacity: 1; animation: auto ease 0s 1 normal none running none;">
+                          <div id="ifzl9IABtPRRKKEz"
+                            style="width:calc(100% * max(1, var(--scale-fill, 1)));height:calc(100% / min(1, var(--scale-fill, 1)));position:absolute;top:50%;left:50%;opacity:1.0;animation:pulse 1.5s ease-in-out infinite;">
                             <a href="https://www.instagram.com/moodlabelmusic/" target="_blank">
-                              <img src="./images/07fdf9fc38b163f07aa263f318625275.svg" alt="Black Instagram Logo"
+                              <img src="images/07fdf9fc38b163f07aa263f318625275.svg" alt="Black Instagram Logo"
                                 loading="lazy"
                                 style="width:100%;height:100%;display:block;object-fit:cover;object-position:50% 50%;transform:translate(-50%, -50%) rotate(0deg);">
                             </a>
@@ -105,18 +318,18 @@
                     </div>
                   </div>
                 </div>
-                <div id="Gcr3sKjHVaO8YyxW" style="z-index:25;">
-                  <div id="jFfxcgU87mgDUQsA" style="padding-top:99.875%;transform:rotate(0deg);">
-                    <div id="mfLCWL1b50jqdDnY" style="position:absolute;top:0px;left:0px;width:100%;height:100%;">
-                      <div id="ROruLpuBTEohoQZ5" style="width:100%;height:100%;opacity:1.0;">
-                        <div id="sl125JbdraX5jTtk"
+                <div id="GprRIDFWB6J1AIVH" style="z-index:25;">
+                  <div id="OT9NC1cAx019Jbb5" style="padding-top:99.875%;transform:rotate(0deg);">
+                    <div id="M2VdAgiqQQ4JQyYs" style="position:absolute;top:0px;left:0px;width:100%;height:100%;">
+                      <div id="Y0DjTFXT1zP8Ztuw" style="width:100%;height:100%;opacity:1.0;">
+                        <div id="IPGIfcqxjzfBWjLB"
                           style="transform:scale(1, 1);width:100%;height:100%;overflow:hidden;position:relative;">
-                          <div id="N9kH6SUJIpOtMU0W"
-                            style="width: calc(100% * max(1, var(--scale-fill, 1))); height: calc(100% / min(1, var(--scale-fill, 1))); position: absolute; top: 50%; left: 50%; opacity: 1; animation: auto ease 0s 1 normal none running none;">
+                          <div id="IoL7uqjI96kksTLO"
+                            style="width:calc(100% * max(1, var(--scale-fill, 1)));height:calc(100% / min(1, var(--scale-fill, 1)));position:absolute;top:50%;left:50%;opacity:1.0;animation:pulse 1.5s ease-in-out infinite;">
                             <a href="https://api.whatsapp.com/send/?phone=573133806868&text=¡Hola%21+Necesito+hablar+con+Juan+Camilo..."
                               target="_blank">
-                              <img src="./images/a71f08ce97c36c389b892d3b547f1573.svg" alt="circle phone icon"
-                                loading="lazy" id="imgButton"
+                              <img src="images/a71f08ce97c36c389b892d3b547f1573.svg" alt="circle phone icon"
+                                loading="lazy"
                                 style="width:100%;height:100%;display:block;object-fit:cover;object-position:50% 50%;transform:translate(-50%, -50%) rotate(0deg);">
                             </a>
                           </div>
@@ -125,17 +338,16 @@
                     </div>
                   </div>
                 </div>
-                <div id="czoHxf5nEZqtsYQ4" style="z-index:26;">
-                  <div id="wEP9TlfQGO5gZkLQ" style="padding-top:73%;transform:rotate(0deg);">
-                    <div id="v7sTETXs1XECIUTp" style="position:absolute;top:0px;left:0px;width:100%;height:100%;">
-                      <div id="NlIoD76GGOl1YwnF" style="width:100%;height:100%;opacity:1.0;">
-                        <div id="LSZhFiGDGL3AzdhE"
+                <div id="sqVRCnHbsyC60WL1" style="z-index:26;">
+                  <div id="uTgzlHmh2g7NS6Vr" style="padding-top:73%;transform:rotate(0deg);">
+                    <div id="GYgWbFR33gdGzahK" style="position:absolute;top:0px;left:0px;width:100%;height:100%;">
+                      <div id="kJ9eQfEj08cUBmFq" style="width:100%;height:100%;opacity:1.0;">
+                        <div id="lOpJv8iWSruzb34G"
                           style="transform:scale(1, 1);width:100%;height:100%;overflow:hidden;position:relative;">
-                          <div id="FFmnCpNND2vL8rnl"
-                            style="width: calc(100% * max(1, var(--scale-fill, 1))); height: calc(100% / min(1, var(--scale-fill, 1))); position: absolute; top: 50%; left: 50%; opacity: 1; animation: auto ease 0s 1 normal none running none;">
+                          <div id="sm4Vbygtf0cDnqYD"
+                            style="width:calc(100% * max(1, var(--scale-fill, 1)));height:calc(100% / min(1, var(--scale-fill, 1)));position:absolute;top:50%;left:50%;opacity:1.0;animation:pulse 1.5s ease-in-out infinite;">
                             <a href="mailto:moodlabelmusic@gmail.com">
-                              <img src="./images/709722105799db3eb95a39100a6e1273.svg" alt="Gmail" loading="lazy"
-                                id="imgButton"
+                              <img src="images/709722105799db3eb95a39100a6e1273.svg" alt="Gmail" loading="lazy"
                                 style="width:100%;height:100%;display:block;object-fit:cover;object-position:50% 50%;transform:translate(-50%, -50%) rotate(0deg);">
                             </a>
                           </div>
@@ -145,55 +357,54 @@
                   </div>
                 </div>
               </div>
-              <div id="JUDOgYHnsBP2yxrI" style="z-index:30;">
-                <div id="D09KME13dqvlLH5R" style="box-sizing:border-box;width:100%;height:100%;transform:rotate(0deg);">
-                  <div id="RrbdHydVqMtWzkDn"
+              <div id="juiJsgEDgH6nP4fi" style="z-index:30;">
+                <div id="gOy7K2hmhEj1bLAl" style="box-sizing:border-box;width:100%;height:100%;transform:rotate(0deg);">
+                  <div id="DAcVtX8W07aQQ5cH"
                     style="opacity:1.0;display:flex;box-sizing:border-box;flex-direction:column;justify-content:flex-start;width:100%;height:100%;">
-                    <p id="mNSFCyIQFvx2qwlu"
+                    <p id="aESB7Q6B7yCqVtfL"
                       style="color:#f5f5ef;font-family:YAFdJsjyMsM-0;line-height:1.39286212em;text-align:center;text-transform:uppercase;letter-spacing:0em;">
-                      <span id="SkCeSesg1niRiUEy" style="color:#f5f5ef;">“T</span><span id="W78wHxAfBd0LWmzN"
-                        style="color:#f5f5ef;">hrive through your purpose”</span>
+                      <span id="OIZwyw3M1XH0DYA0" style="color:#f5f5ef;">“Thrive through your purpose”</span>
                     </p>
                   </div>
                 </div>
               </div>
-              <div id="S3IilHJZmT0DK4xm" style="display:grid;position:relative;grid-area:4 / 9 / 5 / 18;">
-                <div id="MYpbDEPxUvqPbfbC" style="z-index:28;">
-                  <div id="jDem07c2Eo2zcynZ"
+              <div id="NVkL7WqHnF9cTLGc" style="display:grid;position:relative;grid-area:4 / 9 / 5 / 18;">
+                <div id="asFsWiQAU14DTjlw" style="z-index:28;">
+                  <div id="B8hXBcROjLWBMTcF"
                     style="box-sizing:border-box;width:100%;height:100%;transform:rotate(0deg);">
-                    <div id="a2RLMWGN8qKz27CC"
+                    <div id="ryjRfU5tJkQ49Sv2"
                       style="opacity:1.0;display:flex;box-sizing:border-box;flex-direction:column;justify-content:flex-start;width:100%;height:100%;">
-                      <p id="fL53lA7KJdfKNbj1"
+                      <p id="VlaL3hACC6KFfMoY"
                         style="color:#ffffff;font-family:YAFdJsjyMsM-0;line-height:1.17857564em;text-align:center;text-shadow:0em 0.0375em 0.159375em rgba(0, 0, 0, 0.325000);">
-                        <span id="gkmzTi6NlXX8TlC6" style="color:#ffffff;font-weight:700;">Juan Camilo Méndez
+                        <span id="b5Ign3oUs7jQsyO5" style="color:#ffffff;font-weight:700;">Juan Camilo Méndez
                           Oliveros</span>
                       </p>
                     </div>
                   </div>
                 </div>
-                <div id="h6wZwXaSS5WWX8dH" style="z-index:29;">
-                  <div id="Vc8z9vTLfppBpQMg"
+                <div id="TyDzfCAwRFo8zocc" style="z-index:29;">
+                  <div id="yDZfp4AknsggjM49"
                     style="box-sizing:border-box;width:100%;height:100%;transform:rotate(0deg);">
-                    <div id="uzLaqlefgKUGcn4U"
+                    <div id="my44G6q9fTYTHj94"
                       style="opacity:1.0;display:flex;box-sizing:border-box;flex-direction:column;justify-content:flex-start;width:100%;height:100%;">
-                      <p id="EFKGGE4pqxpDG0EV"
+                      <p id="Jay576Om59mJCTIY"
                         style="color:#f5f5ef;font-family:YAFdJsjyMsM-0;line-height:1.18027651em;text-align:center;text-transform:uppercase;letter-spacing:0.05em;text-shadow:0em 0.0375em 0.159375em rgba(0, 0, 0, 0.325000);">
-                        <span id="X1DVnE7jZPwPfjON" style="color:#f5f5ef;font-weight:500;">music producer - mix
+                        <span id="np88mCIIqlYbmj8l" style="color:#f5f5ef;font-weight:500;">music producer - mix
                           engineer</span>
                       </p>
                     </div>
                   </div>
                 </div>
               </div>
-              <div id="xge3lZTGVdPR9aek" style="display:grid;position:relative;grid-area:6 / 10 / 7 / 14;">
-                <div id="PKxBOZ3zfpB5w4z2" style="display:grid;position:relative;grid-area:2 / 2 / 3 / 3;">
-                  <div id="r5FJPTYNeMN5XsL3" style="z-index:5;">
-                    <div id="zR8wDfIHWWkhDfjS" style="padding-top:23.09396713%;transform:rotate(0deg);">
-                      <div id="nr66optD30x6wsJw" style="position:absolute;top:0px;left:0px;width:100%;height:100%;">
-                        <svg id="Se4lntWRxmnJNigs" viewBox="0 0 435.1441 100.492"
-                          style="width:100%;height:100%;opacity:1.0;overflow:hidden;position:absolute;top:0%;left:0%;background:url(&#39;data:image/png;base64,&#39;);">
-                          <g id="Bwcc3Mvm07n8hrfj" style="transform:scale(1, 1);">
-                            <path id="rpyTNAqXn7OYbL1g"
+              <div id="DBSSOjKHCq5lV8BI" style="display:grid;position:relative;grid-area:6 / 10 / 7 / 14;">
+                <div id="Ga6PX8k9Zxj7JW1A" style="display:grid;position:relative;grid-area:2 / 2 / 3 / 3;">
+                  <div id="p33OvZtJ3qqvJm9h" style="z-index:5;">
+                    <div id="oSOJPUGBLXvLkrx4" style="padding-top:23.09396713%;transform:rotate(0deg);">
+                      <div id="HK25KmOcAeqQ5l6n" style="position:absolute;top:0px;left:0px;width:100%;height:100%;">
+                        <svg id="Mdw3pKGZUUIS8Pi6" viewBox="0 0 435.1441 100.492"
+                          style="width:100%;height:100%;opacity:1.0;overflow:hidden;position:absolute;top:0%;left:0%;background:url(&#x27;data:image/png;base64,&#x27;);">
+                          <g id="ceu5ilORIqbbcNGH" style="transform:scale(1, 1);">
+                            <path id="HrULaEZyo25I5pqw"
                               d="M425.34411404,4.69999981 C428.14411709,4.69999981 430.44412015,7 430.44412015,9.80000019 L430.44412015,90.69204922 C430.44412015,93.49205227 428.14411709,95.79204007 425.34411404,95.79204007 L9.80000019,95.79204007 C7.00000048,95.79204007 4.70000029,93.49205227 4.70000029,90.69204922 L4.70000029,9.80000019 C4.69999981,7 7,4.69999981 9.80000019,4.69999981 L425.34411404,4.69999981 M425.34411404,0 L9.80000019,0 C4.4000001,0 0,4.4000001 0,9.80000019 L0,90.69204922 C0,96.09204312 4.4000001,100.49205227 9.80000019,100.49205227 L425.3441293,100.49205227 C430.7441232,100.49205227 435.14413235,96.09204312 435.14413235,90.69204922 L435.14413235,9.80000019 C435.14411709,4.4000001 430.7441232,0 425.34411404,0 Z"
                               style="fill:#38b6ff;opacity:1.0;"></path>
                           </g>
@@ -201,15 +412,17 @@
                       </div>
                     </div>
                   </div>
-                  <div id="eTduu5YwcnhlNwzi" style="z-index:6;">
-                    <div id="o6tTSqoOT7OSdrlK"
+                  <div id="VLq2TBSm9fSQumEo" style="z-index:6;">
+                    <div id="BT5tW3J5otHM73JP"
                       style="box-sizing:border-box;width:100%;height:100%;transform:rotate(0deg);">
-                      <div id="gfcbwftCTBnNEwY0"
+                      <div id="dLPE66CJPbaIAjRi"
                         style="opacity:1.0;display:flex;box-sizing:border-box;flex-direction:column;justify-content:flex-start;width:100%;height:100%;">
                         <a href="#page-2" target="_self">
-                          <p id="ETyd7xABHLFy1mZt"
+                          <p id="qCBSiYB6Q3Epx9BH"
                             style="color:#ffffff;font-family:YAFdJsjyMsM-0;line-height:1.1875em;text-align:center;text-transform:uppercase;letter-spacing:0.1em;text-shadow:0em 0.0375em 0.159375em rgba(0, 0, 0, 0.325000);">
-                            <span id="FNBAulSJtMhB1KMf" style="color:#ffffff;font-weight:600;">MY WORK</span><br>
+                            <span id="OGif2IAXPKEqV488"
+                              style="text-decoration-line:none;color:#ffffff;font-weight:600;">MY WORK</span>
+                            <br>
                           </p>
                         </a>
                       </div>
@@ -217,15 +430,15 @@
                   </div>
                 </div>
               </div>
-              <div id="so2HqnqH265reuLm" style="display:grid;position:relative;grid-area:8 / 11 / 9 / 15;">
-                <div id="J8wjoO9DkQcGhzNU" style="display:grid;position:relative;grid-area:2 / 2 / 3 / 3;">
-                  <div id="f2vgPNXuqYDh7QrM" style="z-index:8;">
-                    <div id="r66ygKgpNiVkjueH" style="padding-top:23.09396713%;transform:rotate(0deg);">
-                      <div id="kFf9EgFHOCab3qqV" style="position:absolute;top:0px;left:0px;width:100%;height:100%;">
-                        <svg id="diLuQ4bMsqeywCRD" viewBox="0 0 435.1441 100.492"
-                          style="width:100%;height:100%;opacity:1.0;overflow:hidden;position:absolute;top:0%;left:0%;background:url(&#39;data:image/png;base64,&#39;);">
-                          <g id="B7yJd2XaszrBGchT" style="transform:scale(1, 1);">
-                            <path id="GciemokqkGr4O9Id"
+              <div id="ba9yzXv8AjuWrsnL" style="display:grid;position:relative;grid-area:8 / 11 / 9 / 15;">
+                <div id="C8XM2KUEOdHPG0Rx" style="display:grid;position:relative;grid-area:2 / 2 / 3 / 3;">
+                  <div id="iTmjBvvJ2RLRI09u" style="z-index:8;">
+                    <div id="jxdKpUE94GWwsQTm" style="padding-top:23.09396713%;transform:rotate(0deg);">
+                      <div id="hjDKnUENoxT0Nlt2" style="position:absolute;top:0px;left:0px;width:100%;height:100%;">
+                        <svg id="u2N0m58mM1fAkH83" viewBox="0 0 435.1441 100.492"
+                          style="width:100%;height:100%;opacity:1.0;overflow:hidden;position:absolute;top:0%;left:0%;background:url(&#x27;data:image/png;base64,&#x27;);">
+                          <g id="IxZXmMehyOcmXMC3" style="transform:scale(1, 1);">
+                            <path id="T731i2e5JWOUF1AB"
                               d="M425.34411404,4.69999981 C428.14411709,4.69999981 430.44412015,7 430.44412015,9.80000019 L430.44412015,90.69204922 C430.44412015,93.49205227 428.14411709,95.79204007 425.34411404,95.79204007 L9.80000019,95.79204007 C7.00000048,95.79204007 4.70000029,93.49205227 4.70000029,90.69204922 L4.70000029,9.80000019 C4.69999981,7 7,4.69999981 9.80000019,4.69999981 L425.34411404,4.69999981 M425.34411404,0 L9.80000019,0 C4.4000001,0 0,4.4000001 0,9.80000019 L0,90.69204922 C0,96.09204312 4.4000001,100.49205227 9.80000019,100.49205227 L425.3441293,100.49205227 C430.7441232,100.49205227 435.14413235,96.09204312 435.14413235,90.69204922 L435.14413235,9.80000019 C435.14411709,4.4000001 430.7441232,0 425.34411404,0 Z"
                               style="fill:#38b6ff;opacity:1.0;"></path>
                           </g>
@@ -233,15 +446,16 @@
                       </div>
                     </div>
                   </div>
-                  <div id="eQ1qAt2nzxHFY7IY" style="z-index:9;">
-                    <div id="Zg1TMQIni42WOzCh"
+                  <div id="SKo5wIwbH95BrdWQ" style="z-index:9;">
+                    <div id="ezbwkrv4bADlnLIE"
                       style="box-sizing:border-box;width:100%;height:100%;transform:rotate(0deg);">
-                      <div id="f8grH7P1dTA3O1dn"
+                      <div id="DS4SwsTjFpcU7jhG"
                         style="opacity:1.0;display:flex;box-sizing:border-box;flex-direction:column;justify-content:flex-start;width:100%;height:100%;">
                         <a href="https://somoseljefe.com" target="_blank">
-                          <p id="L8wxruwkp57KWRld"
+                          <p id="gSbSx0txmKtrpcQN"
                             style="color:#ffffff;font-family:YAFdJsjyMsM-0;line-height:1.1875em;text-align:center;text-transform:uppercase;letter-spacing:0.1em;text-shadow:0em 0.0375em 0.159375em rgba(0, 0, 0, 0.325000);">
-                            <span id="x0npgyE6Z8oQiZpq" style="color:#ffffff;font-weight:600;">EL JEFE</span><br>
+                            <span id="um6sDFkFey3MbF3c" style="color:#ffffff;font-weight:600;">EL JEFE</span>
+                            <br>
                           </p>
                         </a>
                       </div>
@@ -249,15 +463,15 @@
                   </div>
                 </div>
               </div>
-              <div id="p7pEL5ugHMQJhyQm" style="display:grid;position:relative;grid-area:10 / 12 / 11 / 16;">
-                <div id="Q8BBft3mmzG0ol0a" style="display:grid;position:relative;grid-area:2 / 2 / 3 / 3;">
-                  <div id="KK6HfoBaTwpTKndy" style="z-index:11;">
-                    <div id="FUIFOJubq1WRj2n5" style="padding-top:23.09396713%;transform:rotate(0deg);">
-                      <div id="hXbPFIg0S6psUPjI" style="position:absolute;top:0px;left:0px;width:100%;height:100%;">
-                        <svg id="vDR7VrcmKopC4Hk7" viewBox="0 0 435.1441 100.492"
-                          style="width:100%;height:100%;opacity:1.0;overflow:hidden;position:absolute;top:0%;left:0%;background:url(&#39;data:image/png;base64,&#39;);">
-                          <g id="lseQcBVUEMyaBshU" style="transform:scale(1, 1);">
-                            <path id="aox3jrbdGjJpfajc"
+              <div id="JM9cA2vZUbM0z9gL" style="display:grid;position:relative;grid-area:10 / 12 / 11 / 16;">
+                <div id="x8gUCw7Q3nOjkY0L" style="display:grid;position:relative;grid-area:2 / 2 / 3 / 3;">
+                  <div id="QvNQKP5sNn85Z9li" style="z-index:11;">
+                    <div id="e4LUCOg49oyfr7Jo" style="padding-top:23.09396713%;transform:rotate(0deg);">
+                      <div id="kLtLMJv8za6clmWy" style="position:absolute;top:0px;left:0px;width:100%;height:100%;">
+                        <svg id="RsqsMshe6PyATVKx" viewBox="0 0 435.1441 100.492"
+                          style="width:100%;height:100%;opacity:1.0;overflow:hidden;position:absolute;top:0%;left:0%;background:url(&#x27;data:image/png;base64,&#x27;);">
+                          <g id="Nyk2R950ngzhULiZ" style="transform:scale(1, 1);">
+                            <path id="X0x3Z3pq2EEglvUs"
                               d="M425.34411404,4.69999981 C428.14411709,4.69999981 430.44412015,7 430.44412015,9.80000019 L430.44412015,90.69204922 C430.44412015,93.49205227 428.14411709,95.79204007 425.34411404,95.79204007 L9.80000019,95.79204007 C7.00000048,95.79204007 4.70000029,93.49205227 4.70000029,90.69204922 L4.70000029,9.80000019 C4.69999981,7 7,4.69999981 9.80000019,4.69999981 L425.34411404,4.69999981 M425.34411404,0 L9.80000019,0 C4.4000001,0 0,4.4000001 0,9.80000019 L0,90.69204922 C0,96.09204312 4.4000001,100.49205227 9.80000019,100.49205227 L425.3441293,100.49205227 C430.7441232,100.49205227 435.14413235,96.09204312 435.14413235,90.69204922 L435.14413235,9.80000019 C435.14411709,4.4000001 430.7441232,0 425.34411404,0 Z"
                               style="fill:gray;opacity:1.0;"></path>
                           </g>
@@ -265,30 +479,31 @@
                       </div>
                     </div>
                   </div>
-                  <div id="X4SamttaDsMqRUdw" style="z-index:12;">
-                    <div id="SrusWVdOGT6DwBn5"
+                  <div id="i4cYPBQX1VxElanX" style="z-index:12;">
+                    <div id="HVCOwKk3IN4u7JPD"
                       style="box-sizing:border-box;width:100%;height:100%;transform:rotate(0deg);">
-                      <div id="sOqyHnNz6luv5Lo9"
+                      <div id="bylsHz9gwTcFPRDE"
                         style="opacity:1.0;display:flex;box-sizing:border-box;flex-direction:column;justify-content:flex-start;width:100%;height:100%;">
-                        <p id="D1daKGNND3yEvvmi"
+                        <p id="sqPRvUzZFcVMtDip"
                           style="color:#ffffff;font-family:YAFdJsjyMsM-0;line-height:1.1875em;text-align:center;text-transform:uppercase;letter-spacing:0.1em;text-shadow:0em 0.0375em 0.159375em rgba(0, 0, 0, 0.325000);">
-                          <span id="c1F74gEhMyFcO27p" title="Coming soon..."
-                            style="color:#ffffff;font-weight:600;">THRIVE TALK</span><br>
+                          <span id="Ar5RIvi4noZM2SvO" title="Coming soon..."
+                            style="color:#ffffff;font-weight:600;">THRIVE TALK</span>
+                          <br>
                         </p>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-              <div id="XULlW4bRucvSQXyd" style="display:grid;position:relative;grid-area:13 / 13 / 16 / 17;">
-                <div id="JeZXg57EK64id5HL" style="display:grid;position:relative;grid-area:2 / 2 / 3 / 3;">
-                  <div id="FvlFWHOOKcUlmbUo" style="z-index:14;">
-                    <div id="n3V0I73ldVopgKwN" style="padding-top:23.09396713%;transform:rotate(0deg);">
-                      <div id="LHGMh06UaJiTH3Iz" style="position:absolute;top:0px;left:0px;width:100%;height:100%;">
-                        <svg id="oWIhjHUfagxpJiPQ" viewBox="0 0 435.1441 100.492"
-                          style="width:100%;height:100%;opacity:1.0;overflow:hidden;position:absolute;top:0%;left:0%;background:url(&#39;data:image/png;base64,&#39;);">
-                          <g id="cEi6aoXKCl15kE4g" style="transform:scale(1, 1);">
-                            <path id="mZiPnDGBGeqf3Ate"
+              <div id="XWVy5WzvbIu9Q3aC" style="display:grid;position:relative;grid-area:13 / 13 / 16 / 17;">
+                <div id="OlGnuyubmCw1DZSc" style="display:grid;position:relative;grid-area:2 / 2 / 3 / 3;">
+                  <div id="rf4QnZ77eGgbuZSM" style="z-index:14;">
+                    <div id="aq2k01DbHqFxjgsm" style="padding-top:23.09396713%;transform:rotate(0deg);">
+                      <div id="WNMbVaW0RDrF3PUL" style="position:absolute;top:0px;left:0px;width:100%;height:100%;">
+                        <svg id="fEgZaK7oULoiiym6" viewBox="0 0 435.1441 100.492"
+                          style="width:100%;height:100%;opacity:1.0;overflow:hidden;position:absolute;top:0%;left:0%;background:url(&#x27;data:image/png;base64,&#x27;);">
+                          <g id="g9XFxIy9yDXV50Uu" style="transform:scale(1, 1);">
+                            <path id="DziUEtXnJ2ahKTl7"
                               d="M425.34411404,4.69999981 C428.14411709,4.69999981 430.44412015,7 430.44412015,9.80000019 L430.44412015,90.69204922 C430.44412015,93.49205227 428.14411709,95.79204007 425.34411404,95.79204007 L9.80000019,95.79204007 C7.00000048,95.79204007 4.70000029,93.49205227 4.70000029,90.69204922 L4.70000029,9.80000019 C4.69999981,7 7,4.69999981 9.80000019,4.69999981 L425.34411404,4.69999981 M425.34411404,0 L9.80000019,0 C4.4000001,0 0,4.4000001 0,9.80000019 L0,90.69204922 C0,96.09204312 4.4000001,100.49205227 9.80000019,100.49205227 L425.3441293,100.49205227 C430.7441232,100.49205227 435.14413235,96.09204312 435.14413235,90.69204922 L435.14413235,9.80000019 C435.14411709,4.4000001 430.7441232,0 425.34411404,0 Z"
                               style="fill:#38b6ff;opacity:1.0;"></path>
                           </g>
@@ -296,15 +511,16 @@
                       </div>
                     </div>
                   </div>
-                  <div id="l0QmNF0c9IuVCPDG" style="z-index:15;">
-                    <div id="JtllGr4cokMWsyen"
+                  <div id="MFpIRkt589V7JdDe" style="z-index:15;">
+                    <div id="mQIVyDal9gOchscg"
                       style="box-sizing:border-box;width:100%;height:100%;transform:rotate(0deg);">
-                      <div id="Vk2nIXpEkTZjM17x"
+                      <div id="WEFDrAxXuLHbFQ8N"
                         style="opacity:1.0;display:flex;box-sizing:border-box;flex-direction:column;justify-content:flex-start;width:100%;height:100%;">
                         <a href="./files/resume.pdf" target="_blank">
-                          <p id="aUUSVpSI8HaAdeuo"
+                          <p id="mgowbX6171keHO26"
                             style="color:#ffffff;font-family:YAFdJsjyMsM-0;line-height:1.1875em;text-align:center;text-transform:uppercase;letter-spacing:0.1em;text-shadow:0em 0.0375em 0.159375em rgba(0, 0, 0, 0.325000);">
-                            <span id="VifCkvW1QnTmUV3l" style="color:#ffffff;font-weight:600;">RESUME</span><br>
+                            <span id="iAgajehlb9xzJQ69" style="color:#ffffff;font-weight:600;">RESUME</span>
+                            <br>
                           </p>
                         </a>
                       </div>
@@ -315,16 +531,16 @@
             </div>
           </div>
         </div>
-        <div id="ceUCySyyUyRcGLNk">
-          <div id="zNTeVLCZTBVcmuoA" style="display:grid;position:relative;grid-area:3 / 5 / 6 / 7;">
-            <div id="Vot0MubFiUu6UAZr" style="display:grid;position:relative;grid-area:2 / 2 / 3 / 3;">
-              <div id="Bj8EreheneCH7iqc" style="z-index:20;">
-                <div id="mET9hGRMk1DXB3c0" style="padding-top:100%;transform:rotate(0deg);">
-                  <div id="a82fq1lH4r8XwJqF" style="position:absolute;top:0px;left:0px;width:100%;height:100%;">
-                    <svg id="ckScdqJrghkGa6xs" viewBox="0 0 64.0 64.0"
-                      style="width:100%;height:100%;opacity:1.0;overflow:hidden;position:absolute;top:0%;left:0%;background:url(&#39;data:image/png;base64,&#39;);">
-                      <g id="n3kOQwL7I6H3by1s" style="transform:scale(1, 1);">
-                        <path id="WrlC7z8EtqO4FsIi"
+        <div id="EW7X4whirzVzyjb5">
+          <div id="A9yULK76TU4sbsY7" style="display:grid;position:relative;grid-area:3 / 5 / 6 / 7;">
+            <div id="fVfiY0IveYBM9D7M" style="display:grid;position:relative;grid-area:2 / 2 / 3 / 3;">
+              <div id="Jtd1yXnSSz9h4zrv" style="z-index:20;">
+                <div id="hyqttCMlb2i894h2" style="padding-top:100%;transform:rotate(0deg);">
+                  <div id="Oqp67jekiQXhf853" style="position:absolute;top:0px;left:0px;width:100%;height:100%;">
+                    <svg id="YzVqOTYheAyixb32" viewBox="0 0 64.0 64.0"
+                      style="width:100%;height:100%;opacity:1.0;overflow:hidden;position:absolute;top:0%;left:0%;background:url(&#x27;data:image/png;base64,&#x27;);">
+                      <g id="XBi7K7bKXtBkMwE1" style="transform:scale(1, 1);">
+                        <path id="P9sTe4FQfRNHJcoR"
                           d="M32,0 C14.32688808,0 0,14.32688808 0,32 C0,49.67311096 14.32688808,64 32,64 C49.67311096,64 64,49.67311096 64,32 C64,14.32688808 49.67311096,0 32,0 Z"
                           style="fill:#d9d9d9;opacity:1.0;"></path>
                       </g>
@@ -332,18 +548,17 @@
                   </div>
                 </div>
               </div>
-              <div id="lSD2jTlwsTuE0ZCF" style="z-index:21;">
-                <div id="KqSA0Ahtbah9y9CV" style="padding-top:99.9996%;transform:rotate(0deg);">
-                  <div id="LBj6BlcZe7Wvtwuw" style="position:absolute;top:0px;left:0px;width:100%;height:100%;">
-                    <svg id="QTp8iwkkVcKoLrfz" viewBox="0 0 500.0 499.998"
-                      style="width:100%;height:100%;opacity:1.0;overflow:hidden;position:absolute;top:0%;left:0%;background:url(&#39;data:image/png;base64,&#39;);">
-                      <g id="w0ETjN02A9EjT0ZA" style="transform:scale(1, 1);">
-                        <foreignobject id="JCQblmP4T4kMAXaC" style="width:500px;height:499.998px;">
-                          <div id="XNCP6UJVxF2v0Uec"
-                            style="clip-path:path(&#39;M500,250.0019989 C500,388.06700134 388.06900024,499.9980011 250,499.9980011 C111.92900085,499.9980011 0,388.06700134 0,250.0019989 C0,111.93000031 111.92900085,0 250,0 C388.07099915,0 500,111.93000031 500,250.0019989 Z&#39;);">
-                            <div id="huNlxQzkGf70OP8T"
-                              style="transform: scale(1, 1); transform-origin: 250px 250px; animation: auto ease 0s 1 normal none running none;">
-                              <img src="./images/25f8c409fdf91345448d2d369bfcf8ed.png" loading="lazy"
+              <div id="udCmIwuuSlHMDoUS" style="z-index:21;">
+                <div id="l84XTcPSJLDh3kOo" style="padding-top:99.9996%;transform:rotate(0deg);">
+                  <div id="uLQQjlUnuMAjGHBe" style="position:absolute;top:0px;left:0px;width:100%;height:100%;">
+                    <svg id="yhFyEslQta9eLuVD" viewBox="0 0 500.0 499.998"
+                      style="width:100%;height:100%;opacity:1.0;overflow:hidden;position:absolute;top:0%;left:0%;background:url(&#x27;data:image/png;base64,&#x27;);">
+                      <g id="T8uYOtD990gQhOjv" style="transform:scale(1, 1);">
+                        <foreignobject id="MmXYf7qIsJmDKv2F" style="width:500px;height:499.998px;">
+                          <div id="l6cYJHTonjM6SgLK"
+                            style="clip-path:path(&#x27;M500,250.0019989 C500,388.06700134 388.06900024,499.9980011 250,499.9980011 C111.92900085,499.9980011 0,388.06700134 0,250.0019989 C0,111.93000031 111.92900085,0 250,0 C388.07099915,0 500,111.93000031 500,250.0019989 Z&#x27;);">
+                            <div id="vwo6OpzWUEAtByH1" style="transform:scale(1, 1);transform-origin:250px 250px;">
+                              <img src="images/25f8c409fdf91345448d2d369bfcf8ed.png" loading="lazy"
                                 style="transform:translate(-57.51855445px, -58.96263096px) rotate(0deg);transform-origin:311.5518595px 311.5518595px;width:623.10371901px;height:623.10371901px;display:block;opacity:1.0;object-fit:fill;">
                             </div>
                           </div>
@@ -356,16 +571,16 @@
             </div>
           </div>
         </div>
-        <div id="BXrVQTXrvpCUBYn5">
-          <div id="OvfLLTsVgZSeZzbX" style="display:grid;position:relative;grid-area:4 / 3 / 7 / 4;">
-            <div id="sud6kjBkdWRnNMd4" style="display:grid;position:relative;grid-area:2 / 2 / 3 / 3;">
-              <div id="obKBf0Zy1Pq3KMxH" style="z-index:17;">
-                <div id="MZ9hPGx40MFIfYgV" style="padding-top:100%;transform:rotate(0deg);">
-                  <div id="gRhIDQV99H0Ywxb6" style="position:absolute;top:0px;left:0px;width:100%;height:100%;">
-                    <svg id="O5ZeEU3URc72F3gH" viewBox="0 0 64.0 64.0"
-                      style="width:100%;height:100%;opacity:1.0;overflow:hidden;position:absolute;top:0%;left:0%;background:url(&#39;data:image/png;base64,&#39;);">
-                      <g id="tzOnoS5AEM31fFpi" style="transform:scale(1, 1);">
-                        <path id="HWPL5cviYlh4V5pC"
+        <div id="udYfhIWfqLAUyWop">
+          <div id="HZGgG1q1WqfOpl8b" style="display:grid;position:relative;grid-area:4 / 3 / 7 / 4;">
+            <div id="TpTdrT3DmoTutp4m" style="display:grid;position:relative;grid-area:2 / 2 / 3 / 3;">
+              <div id="d8mXBTYjbbDF8Xh5" style="z-index:17;">
+                <div id="jeTZePOHGGHnca4h" style="padding-top:100%;transform:rotate(0deg);">
+                  <div id="N1hLEx2At8IuT3xo" style="position:absolute;top:0px;left:0px;width:100%;height:100%;">
+                    <svg id="YE7kVJMJ0DmGQzQf" viewBox="0 0 64.0 64.0"
+                      style="width:100%;height:100%;opacity:1.0;overflow:hidden;position:absolute;top:0%;left:0%;background:url(&#x27;data:image/png;base64,&#x27;);">
+                      <g id="OYBrJpn6HIbdN8MZ" style="transform:scale(1, 1);">
+                        <path id="UxkesEF31stxpRNt"
                           d="M32,0 C14.32688808,0 0,14.32688808 0,32 C0,49.67311096 14.32688808,64 32,64 C49.67311096,64 64,49.67311096 64,32 C64,14.32688808 49.67311096,0 32,0 Z"
                           style="fill:#d9d9d9;opacity:1.0;"></path>
                       </g>
@@ -373,18 +588,17 @@
                   </div>
                 </div>
               </div>
-              <div id="K2Jv3alcSJGsmQ5k" style="z-index:18;">
-                <div id="J1HRRMSTjld4giIL" style="padding-top:99.9996%;transform:rotate(0deg);">
-                  <div id="trVD9juFkuFC85JR" style="position:absolute;top:0px;left:0px;width:100%;height:100%;">
-                    <svg id="knYN4hpncCXgEasI" viewBox="0 0 500.0 499.998"
-                      style="width:100%;height:100%;opacity:1.0;overflow:hidden;position:absolute;top:0%;left:0%;background:url(&#39;data:image/png;base64,&#39;);">
-                      <g id="T80VBQk8XZOHluef" style="transform:scale(1, 1);">
-                        <foreignobject id="bjvkk5Ez9U1hbnN9" style="width:500px;height:499.998px;">
-                          <div id="wPKfOdQDgDRyc5AC"
-                            style="clip-path:path(&#39;M500,250.0019989 C500,388.06700134 388.06900024,499.9980011 250,499.9980011 C111.92900085,499.9980011 0,388.06700134 0,250.0019989 C0,111.93000031 111.92900085,0 250,0 C388.07099915,0 500,111.93000031 500,250.0019989 Z&#39;);">
-                            <div id="TgynhKfZlO1cyMmN"
-                              style="transform: scale(1, 1); transform-origin: 250px 250px; animation: auto ease 0s 1 normal none running none;">
-                              <img src="./images/d8c7cb544389778b35af0e3a627480de.png" loading="lazy"
+              <div id="xjfL1KbFf9syERAB" style="z-index:18;">
+                <div id="jGKniS8vFbcXMqZr" style="padding-top:99.9996%;transform:rotate(0deg);">
+                  <div id="Q0xoS6vFMzMh3xkG" style="position:absolute;top:0px;left:0px;width:100%;height:100%;">
+                    <svg id="wspjxKeOO3kFyP1M" viewBox="0 0 500.0 499.998"
+                      style="width:100%;height:100%;opacity:1.0;overflow:hidden;position:absolute;top:0%;left:0%;background:url(&#x27;data:image/png;base64,&#x27;);">
+                      <g id="VLF3UGTZfDpTRFqq" style="transform:scale(1, 1);">
+                        <foreignobject id="c4ozc4gLaDjkc4sK" style="width:500px;height:499.998px;">
+                          <div id="DKTt11IilVH6BAjo"
+                            style="clip-path:path(&#x27;M500,250.0019989 C500,388.06700134 388.06900024,499.9980011 250,499.9980011 C111.92900085,499.9980011 0,388.06700134 0,250.0019989 C0,111.93000031 111.92900085,0 250,0 C388.07099915,0 500,111.93000031 500,250.0019989 Z&#x27;);">
+                            <div id="Mcohf3TPKsPWDbjl" style="transform:scale(1, 1);transform-origin:250px 250px;">
+                              <img src="images/d8c7cb544389778b35af0e3a627480de.png" loading="lazy"
                                 style="transform:translate(0px, -0.001px) rotate(0deg);transform-origin:250px 250px;width:500px;height:500px;display:block;opacity:1.0;object-fit:fill;">
                             </div>
                           </div>
@@ -401,150 +615,311 @@
     </section>
 
     <a id="page-2" aria-hidden="true" style="visibility:hidden;"></a>
-    <!-- <div style="width: 100%; height: 100px;background-color: orange;">
-      <p id="fL53lA7KJdfKNbj1"
-        style="color:#ffffff;font-family:YAFdJsjyMsM-0;line-height:1.17857564em;text-align:center;transform: translateY(50%);">
-        <span id="gkmzTi6NlXX8TlC6" style="color:#ffffff;font-weight:700;">Production</span>
-      </p>
-    </div> -->
-    <section
-      style="grid-template-rows: repeat(4, 95px);position:relative;overflow:hidden;display:grid;align-items:center;grid-template-columns:10.5% 25% 2% 25% 2% 25% 10.5%;z-index:0;margin-top:50px;">
-      <div style="grid-area: 1 / 2 / 1 / 2;">
-        <iframe style="border-radius:12px"
-          src="https://open.spotify.com/embed/track/3zbjDwnLHL8OKg9bFJFWPC?utm_source=generator" width="100%"
-          height="100%" frameBorder="0" allowfullscreen=""
-          allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+    <section id="ji8qtCRkfgxCRWQf"
+      style="position:relative;overflow:hidden;display:grid;align-items:center;grid-template-columns:auto 100rem auto;z-index:0;margin-top:-1px;">
+      <div id="jj9D1C0LsNPegPmC"
+        style="grid-area:1 / 1 / 2 / 4;display:grid;position:absolute;min-height:100%;min-width:100%;">
+        <div id="kI8ilS2tVl47aUBV" style="z-index:0;">
+          <div id="givIII0hMdne9Mou" style="box-sizing:border-box;width:100%;height:100%;transform:rotate(0deg);">
+            <div id="FIUGejUJ97D73Rph" style="width:100%;height:100%;opacity:1.0;">
+              <div id="gYtAZnNW1DwLzSIa"
+                style="background-color:#000000;opacity:1.0;transform:scale(1, 1);width:100%;height:100%;overflow:hidden;position:relative;">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="ZOmJkiNVbmnlc8Sm" style="z-index:1;">
+          <div id="EJShs2YPLawdElAl" style="box-sizing:border-box;width:100%;height:100%;transform:rotate(0deg);">
+            <div id="XGldP9pLM2TcrO1b" style="width:100%;height:100%;opacity:0.43;">
+              <div id="mo7KHgxirK2ca9AX"
+                style="transform:scale(1, 1);width:100%;height:100%;overflow:hidden;position:relative;">
+                <div id="UM0xWBiaSEbCDmqI"
+                  style="width:calc(100% * max(1, var(--scale-fill, 1)));height:calc(133.42013889% / min(1, var(--scale-fill, 1)));position:absolute;top:50%;left:50%;opacity:1.0;animation:pulse 1.5s ease-in-out infinite;">
+                  <img src="images/0426985445e98036a6232e42e0242014.jpg" loading="lazy"
+                    srcset="images/4c33808c0dad97d2d34e26d481da8308.jpg 820w, images/0426985445e98036a6232e42e0242014.jpg 1640w"
+                    sizes="(max-width: 375px) 357.41644909vw, (min-width: 375.05px) and (max-width: 480px) 290.51215278vw, (min-width: 480.05px) and (max-width: 768px) 214.80040598vw, (min-width: 768.05px) and (max-width: 1024px) 161.10030449vw, (min-width: 1024.05px) 100vw"
+                    style="width:100%;height:100%;display:block;object-fit:cover;object-position:50% 50%;transform:translate(-50%, -50%) rotate(0deg);">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-      <div style="grid-area: 1 / 4 / 1 / 4;">
-        <iframe style="border-radius:12px"
-          src="https://open.spotify.com/embed/track/5lqJWHaFtkgU0hvuGsRjjo?utm_source=generator" width="100%"
-          height="100%" frameBorder="0" allowfullscreen=""
-          allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-      </div>
-      <div style="grid-area: 1 / 6 / 1 / 6;">
-        <iframe style="border-radius:12px"
-          src="https://open.spotify.com/embed/track/7FX52QI7yEqZoRQF3a61o7?utm_source=generator" width="100%"
-          height="100%" frameBorder="0" allowfullscreen=""
-          allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-      </div>
-      <div style="grid-area: 2 / 2 / 2 / 2;">
-        <iframe style="border-radius:12px"
-          src="https://open.spotify.com/embed/track/6oXUzlTH18oyx6cgEfSISx?utm_source=generator" width="100%"
-          height="100%" frameBorder="0" allowfullscreen=""
-          allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-      </div>
-      <div style="grid-area: 2 / 4 / 2 / 4;">
-        <iframe style="border-radius:12px"
-          src="https://open.spotify.com/embed/track/7MiJufmt9oVUNLYU1LNsZZ?utm_source=generator" width="100%"
-          height="100%" frameBorder="0" allowfullscreen=""
-          allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-      </div>
-      <div style="grid-area: 2 / 6 / 2 / 6;">
-        <iframe style="border-radius:12px"
-          src="https://open.spotify.com/embed/track/0j4JuPNtydzcovU6cUAUP3?utm_source=generator" width="100%"
-          height="100%" frameBorder="0" allowfullscreen=""
-          allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-      </div>
-      <div style="grid-area: 3 / 2 / 3 / 2;">
-        <iframe style="border-radius:12px"
-          src="https://open.spotify.com/embed/track/3BZHsN5WVfTLVcgkStRGqv?utm_source=generator" width="100%"
-          height="100%" frameBorder="0" allowfullscreen=""
-          allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-      </div>
-      <div style="grid-area: 3 / 4 / 3 / 4;">
-        <iframe style="border-radius:12px"
-          src="https://open.spotify.com/embed/track/0HRCohICOP2p7odsPTmezG?utm_source=generator" width="100%"
-          height="100%" frameBorder="0" allowfullscreen=""
-          allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-      </div>
-      <div style="grid-area: 3 / 6 / 3 / 6;">
-        <iframe style="border-radius:12px"
-          src="https://open.spotify.com/embed/track/7pKleelTbOrDecOEz6soUV?utm_source=generator" width="100%"
-          height="100%" frameBorder="0" allowfullscreen=""
-          allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-      </div>
-      <div style="grid-area: 4 / 4 / 4 / 4;">
-        <iframe style="border-radius:12px"
-          src="https://open.spotify.com/embed/track/50olYfug6tIjl3opWlPdBq?utm_source=generator" width="100%"
-          height="100%" frameBorder="0" allowfullscreen=""
-          allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-      </div>
-    </section>
-    <section
-      style="position:relative;overflow:hidden;display:grid;align-items:center;grid-template-columns:25% 50% 25%;z-index:0;margin-top:50px;">
-      <div style="grid-area: 1 / 2 / 1 / 2;">
-        <iframe width="100%" height="450" scrolling="no" frameborder="no" allow="autoplay"
-          src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/1757702367&color=%232a2a29&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true"></iframe>
-        <div
-          style="font-size: 10px; color: #cccccc;line-break: anywhere;word-break: normal;overflow: hidden;white-space: nowrap;text-overflow: ellipsis; font-family: Interstate,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Garuda,Verdana,Tahoma,sans-serif;font-weight: 100;">
-          <a href="https://soundcloud.com/moodlabelmusic" title="Juan Camilo Méndez" target="_blank"
-            style="color: #cccccc; text-decoration: none;">Juan Camilo Méndez</a> · <a
-            href="https://soundcloud.com/moodlabelmusic/sets/by-jcmo" title="By JCMO" target="_blank"
-            style="color: #cccccc; text-decoration: none;">By JCMO</a>
+      <div id="QL607yJ9ZgGfv8Z5" style="display:grid;position:relative;grid-area:1 / 2 / 2 / 3;">
+        <div id="GqIZaCwudUIPqnrF" style="z-index:2;">
+          <div
+            style="grid-template-rows: repeat(5, 95px);position:relative;overflow:hidden;display:grid;align-items:center;grid-template-columns:49% 2% 49%;z-index:0;">
+            <div style="grid-area: 1 / 1 / 1 / 1;">
+              <iframe style="border-radius:12px" scrolling="no"
+                src="https://open.spotify.com/embed/track/3zbjDwnLHL8OKg9bFJFWPC?utm_source=generator" width="100%"
+                height="100%" frameBorder="0" allowfullscreen=""
+                allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                loading="lazy"></iframe>
+            </div>
+            <div style="grid-area: 1 / 3 / 1 / 3;">
+              <iframe style="border-radius:12px" scrolling="no"
+                src="https://open.spotify.com/embed/track/5lqJWHaFtkgU0hvuGsRjjo?utm_source=generator" width="100%"
+                height="100%" frameBorder="0" allowfullscreen=""
+                allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                loading="lazy"></iframe>
+            </div>
+            <div style="grid-area: 2 / 1 / 2 / 1;">
+              <iframe style="border-radius:12px"
+                src="https://open.spotify.com/embed/track/7FX52QI7yEqZoRQF3a61o7?utm_source=generator" width="100%"
+                scrolling="no" height="100%" frameBorder="0" allowfullscreen=""
+                allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                loading="lazy"></iframe>
+            </div>
+            <div style="grid-area: 2 / 3 / 2 / 3;">
+              <iframe style="border-radius:12px"
+                src="https://open.spotify.com/embed/track/6oXUzlTH18oyx6cgEfSISx?utm_source=generator" width="100%"
+                scrolling="no" height="100%" frameBorder="0" allowfullscreen=""
+                allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                loading="lazy"></iframe>
+            </div>
+            <div style="grid-area: 3 / 1 / 3 / 1;">
+              <iframe style="border-radius:12px"
+                src="https://open.spotify.com/embed/track/7MiJufmt9oVUNLYU1LNsZZ?utm_source=generator" width="100%"
+                scrolling="no" height="100%" frameBorder="0" allowfullscreen=""
+                allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                loading="lazy"></iframe>
+            </div>
+            <div style="grid-area: 3 / 3 / 3 / 3;">
+              <iframe style="border-radius:12px"
+                src="https://open.spotify.com/embed/track/0j4JuPNtydzcovU6cUAUP3?utm_source=generator" width="100%"
+                scrolling="no" height="100%" frameBorder="0" allowfullscreen=""
+                allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                loading="lazy"></iframe>
+            </div>
+            <div style="grid-area: 4 / 1 / 4 / 1;">
+              <iframe style="border-radius:12px"
+                src="https://open.spotify.com/embed/track/3BZHsN5WVfTLVcgkStRGqv?utm_source=generator" width="100%"
+                scrolling="no" height="100%" frameBorder="0" allowfullscreen=""
+                allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                loading="lazy"></iframe>
+            </div>
+            <div style="grid-area: 4 / 3 / 4 / 3;">
+              <iframe style="border-radius:12px"
+                src="https://open.spotify.com/embed/track/0HRCohICOP2p7odsPTmezG?utm_source=generator" width="100%"
+                scrolling="no" height="100%" frameBorder="0" allowfullscreen=""
+                allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                loading="lazy"></iframe>
+            </div>
+            <div style="grid-area: 5 / 1 / 5 / 1;">
+              <iframe style="border-radius:12px"
+                src="https://open.spotify.com/embed/track/7pKleelTbOrDecOEz6soUV?utm_source=generator" width="100%"
+                scrolling="no" height="100%" frameBorder="0" allowfullscreen=""
+                allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                loading="lazy"></iframe>
+            </div>
+            <div style="grid-area: 5 / 3 / 5 / 3;">
+              <iframe style="border-radius:12px"
+                src="https://open.spotify.com/embed/track/50olYfug6tIjl3opWlPdBq?utm_source=generator" width="100%"
+                scrolling="no" height="100%" frameBorder="0" allowfullscreen=""
+                allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                loading="lazy"></iframe>
+            </div>
+          </div>
+        </div>
+        <div id="u3ZijQUoivpJfLCX">
+          <div id="BCLuDVlhsKHF7B3V" style="display:grid;position:relative;">
+            <div id="zaX3OaK5cLXA0534" style="z-index:5;">
+              <div id="cyiu8FSqUvsQvKtI" style="box-sizing:border-box;width:100%;height:100%;transform:rotate(0deg);">
+                <div id="H67hY7dHOh7wDPJ3"
+                  style="opacity:1.0;display:flex;box-sizing:border-box;flex-direction:column;justify-content:flex-start;width:100%;height:100%;">
+                  <p id="ZvihDudscic2VCGi"
+                    style="color:#38b6ff;font-family:YAFdJr3SNlU-0;line-height:0.99368799em;text-align:center;text-transform:uppercase;-webkit-text-stroke:0.0375em rgb(56, 182, 255);-webkit-text-fill-color:transparent;">
+                    <span id="ECj8qHSr9wHI3Lo7" style="color:#38b6ff;font-weight:900;">Artist</span>
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div id="ZVYJgXFtNuTTdqs5" style="z-index:6;">
+              <div id="d7KPT1CSlEa0ypgF" style="box-sizing:border-box;width:100%;height:100%;transform:rotate(0deg);">
+                <div id="LAfbroLmxhvgXboF"
+                  style="opacity:1.0;display:flex;box-sizing:border-box;flex-direction:column;justify-content:flex-start;width:100%;height:100%;">
+                  <p id="siTX0M4KotSZZdOA"
+                    style="color:#ededed;font-family:YAFdJr3SNlU-0;line-height:0.99739571em;text-align:center;text-transform:uppercase;">
+                    <span id="d0OD3X4Yl9f900PP" style="color:#ededed;font-weight:900;">Music</span>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="ygpWpykCcrVabYuQ" style="z-index:7;">
+          <div id="UYEOOvXDOIuswiO7" style="box-sizing:border-box;width:100%;height:100%;transform:rotate(0deg);">
+            <div id="VOxXVZtxkh8clyI2"
+              style="opacity:1.0;display:flex;box-sizing:border-box;flex-direction:column;justify-content:flex-start;width:100%;height:100%;">
+              <p id="WgVoHVq6zlrlB7EO"
+                style="color:#ffffff;font-family:YAFdJsjyMsM-0;line-height:1.1875em;text-align:center;text-transform:uppercase;letter-spacing:0.1em;">
+                <span id="RqOXcQ7qxMIO46dq" style="color:#ffffff;font-weight:600;">MUSIC PRODUCTION FOR ARTISTS</span>
+                <br>
+              </p>
+            </div>
+          </div>
+        </div>
+        <div id="Fb1tY5pzneRXaMdL" style="z-index:8;">
+          <div id="jnm5FGIxPFWerwKG" style="box-sizing:border-box;width:100%;height:100%;transform:rotate(0deg);">
+            <div id="dVLUlghvBfFuMzSn"
+              style="opacity:1.0;display:flex;box-sizing:border-box;flex-direction:column;justify-content:flex-start;width:100%;height:100%;">
+              <p id="MKewfRwHF5ovgAEQ"
+                style="color:#ffffff;font-family:YAFdJsjyMsM-0;line-height:1.1875em;text-align:center;text-transform:uppercase;letter-spacing:0.1em;">
+                <span id="H7EvBR4gBGWxPJe7" style="color:#ffffff;font-weight:600;">Mixing for music productions</span>
+                <br>
+              </p>
+            </div>
+          </div>
         </div>
       </div>
     </section>
-    <section
-      style="position:relative;overflow:hidden;display:grid;align-items:center;grid-template-columns:9% 40% 2% 40% 9%;z-index:0;margin-top:50px;">
-      <div style="grid-area: 2 / 2 / 2 / 2;">
-        <iframe width="100%" height="315" src="https://www.youtube.com/embed/2p8eRCpdVZQ?si=Zru3h5BkCiPHk9Bv"
-          title="YouTube video player" frameborder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          allowfullscreen></iframe>
+
+    <a id="page-3" aria-hidden="true" style="visibility:hidden;"></a>
+    <section id="oIoi8TYTo9TdlrVN"
+      style="position:relative;overflow:hidden;display:grid;align-items:center;grid-template-columns:auto 100rem auto;z-index:0;margin-top:-1px;">
+      <div id="z0SZjdVUhbDIDBbl"
+        style="grid-area:1 / 1 / 2 / 4;display:grid;position:absolute;min-height:100%;min-width:100%;">
+        <div id="v7JnVKDFFsvOkN80" style="z-index:0;">
+          <div id="cm7Q5XaCJDaKgVAM" style="box-sizing:border-box;width:100%;height:100%;transform:rotate(0deg);">
+            <div id="zzrDcP8wOjlIhOMC" style="width:100%;height:100%;opacity:1.0;">
+              <div id="Jpen46TUIfPQYuNv"
+                style="background-color:#000000;opacity:1.0;transform:scale(1, 1);width:100%;height:100%;overflow:hidden;position:relative;">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="YtFWN33vdlo7qmMT" style="z-index:1;">
+          <div id="MUV3aCl02EgKdrgQ" style="box-sizing:border-box;width:100%;height:100%;transform:rotate(0deg);">
+            <div id="uMnqV1RJKFZ1XDI0" style="width:100%;height:100%;opacity:0.21;">
+              <div id="sIhJUhn7gsbW9ofO"
+                style="transform:scale(1, 1);width:100%;height:100%;overflow:hidden;position:relative;">
+                <div id="wxpbeWdZLz1fOv9g"
+                  style="width:calc(100% * max(1, var(--scale-fill, 1)));height:calc(132.84434222% / min(1, var(--scale-fill, 1)));position:absolute;top:50%;left:50%;opacity:1.0;animation:pulse 1.5s ease-in-out infinite;">
+                  <img src="images/b70b01062fb104f507e61a55c9ae310f.jpg" loading="lazy"
+                    srcset="images/8a610b273a779a15fe060302d6fdd35e.jpg 642w, images/b70b01062fb104f507e61a55c9ae310f.jpg 1284w"
+                    sizes="(max-width: 375px) 264.70075087vw, (min-width: 375.05px) and (max-width: 480px) 252.08696935vw, (min-width: 480.05px) and (max-width: 768px) 201.54519547vw, (min-width: 768.05px) and (max-width: 1024px) 154.62452803vw, (min-width: 1024.05px) 100vw"
+                    style="width:100%;height:100%;display:block;object-fit:cover;object-position:50% 50%;transform:translate(-50%, -50%) rotate(0deg);">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-      <div style="grid-area: 2 / 4 / 2 / 4;">
-        <iframe width="100%" height="315" src="https://www.youtube.com/embed/EgqoU13guDw?si=q1NIDQiP0DVBsnOc"
-          title="YouTube video player" frameborder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          allowfullscreen></iframe>
-      </div>
-      <div style="grid-area: 3 / 2 / 3 / 2;">
-        <iframe width="100%" height="315" src="https://www.youtube.com/embed/_SJ7tnSXNeQ?si=KRStLiJTo6w-4_bI"
-          title="YouTube video player" frameborder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          allowfullscreen></iframe>
-      </div>
-      <div style="grid-area: 3 / 4 / 3 / 4;">
-        <iframe width="100%" height="315" src="https://www.youtube.com/embed/RkP2sFOPEFU?si=vTV86QUffVSc1Glv"
-          title="YouTube video player" frameborder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          allowfullscreen></iframe>
-      </div>
-      <div style="grid-area: 4 / 2 / 4 / 2;">
-        <iframe width="100%" height="315" src="https://www.youtube.com/embed/qvsvYZ9A3uY?si=tdvDrYuksCwXc4n9"
-          title="YouTube video player" frameborder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          allowfullscreen></iframe>
-      </div>
-      <div style="grid-area: 4 / 4 / 4 / 4;">
-        <iframe width="100%" height="315" src="https://www.youtube.com/embed/P5OjLixh34M?si=5CcgBlkPEK_Ku-Ut"
-          title="YouTube video player" frameborder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          allowfullscreen></iframe>
-      </div>
-      <div style="grid-area: 5 / 2 / 5 / 2;">
-        <iframe width="100%" height="315" src="https://www.youtube.com/embed/P5skJQZQiL0?si=8wIihalYL6hkMDkE"
-          title="YouTube video player" frameborder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          allowfullscreen></iframe>
-      </div>
-      <div style="grid-area: 5 / 4 / 5 / 4;">
-        <iframe width="100%" height="315" src="https://www.youtube.com/embed/rvI0MLyUtPI?si=G_apt7HobgyuqVB0"
-          title="YouTube video player" frameborder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          allowfullscreen></iframe>
-      </div>
-      <div style="grid-area: 6 / 2 / 6 / 2;">
-        <iframe width="100%" height="315" src="https://www.youtube.com/embed/JhCJzKjH_r4?si=BSzhNNUd2DRtUo6O"
-          title="YouTube video player" frameborder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          allowfullscreen></iframe>
-      </div>
-      <div style="grid-area: 6 / 4 / 6 / 4;">
-        <iframe width="100%" height="315" src="https://www.youtube.com/embed/5O3z_rSq6J0?si=OoOTowUSkYCwkroJ"
-          title="YouTube video player" frameborder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          allowfullscreen></iframe>
+      <div id="eMypKUuM9OWaKMZT" style="display:grid;position:relative;grid-area:1 / 2 / 2 / 3;">
+        <div id="KkYfUPoK0pKnKvZw" style="z-index:2;">
+          <div
+            style="position:relative;overflow:hidden;display:grid;align-items:center;grid-template-columns:49% 2% 49%;z-index:0;">
+            <div style="grid-area: 1 / 1 / 1 / 1;">
+              <iframe width="100%" height="315" src="https://www.youtube.com/embed/2p8eRCpdVZQ?si=Zru3h5BkCiPHk9Bv"
+                title="YouTube video player" frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowfullscreen></iframe>
+            </div>
+            <div style="grid-area: 1 / 3 / 1 / 3;">
+              <iframe width="100%" height="315" src="https://www.youtube.com/embed/EgqoU13guDw?si=q1NIDQiP0DVBsnOc"
+                title="YouTube video player" frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowfullscreen></iframe>
+            </div>
+            <div style="grid-area: 2 / 1 / 2 / 1;">
+              <iframe width="100%" height="315" src="https://www.youtube.com/embed/_SJ7tnSXNeQ?si=KRStLiJTo6w-4_bI"
+                title="YouTube video player" frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowfullscreen></iframe>
+            </div>
+            <div style="grid-area: 2 / 3 / 2 / 3;">
+              <iframe width="100%" height="315" src="https://www.youtube.com/embed/RkP2sFOPEFU?si=vTV86QUffVSc1Glv"
+                title="YouTube video player" frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowfullscreen></iframe>
+            </div>
+            <div style="grid-area: 3 / 1 / 3 / 1;">
+              <iframe width="100%" height="315" src="https://www.youtube.com/embed/qvsvYZ9A3uY?si=tdvDrYuksCwXc4n9"
+                title="YouTube video player" frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowfullscreen></iframe>
+            </div>
+            <div style="grid-area: 3 / 3 / 3 / 3;">
+              <iframe width="100%" height="315" src="https://www.youtube.com/embed/P5OjLixh34M?si=5CcgBlkPEK_Ku-Ut"
+                title="YouTube video player" frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowfullscreen></iframe>
+            </div>
+            <div style="grid-area: 4 / 1 / 4 / 1;">
+              <iframe width="100%" height="315" src="https://www.youtube.com/embed/P5skJQZQiL0?si=8wIihalYL6hkMDkE"
+                title="YouTube video player" frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowfullscreen></iframe>
+            </div>
+            <div style="grid-area: 4 / 3 / 4 / 3;">
+              <iframe width="100%" height="315" src="https://www.youtube.com/embed/rvI0MLyUtPI?si=G_apt7HobgyuqVB0"
+                title="YouTube video player" frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowfullscreen></iframe>
+            </div>
+            <div style="grid-area: 5 / 1 / 5 / 1;">
+              <iframe width="100%" height="315" src="https://www.youtube.com/embed/JhCJzKjH_r4?si=BSzhNNUd2DRtUo6O"
+                title="YouTube video player" frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowfullscreen></iframe>
+            </div>
+            <div style="grid-area: 5 / 3 / 5 / 3;">
+              <iframe width="100%" height="315" src="https://www.youtube.com/embed/5O3z_rSq6J0?si=OoOTowUSkYCwkroJ"
+                title="YouTube video player" frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowfullscreen></iframe>
+            </div>
+            <div style="grid-area: 6 / 1 / 6 / 1;">
+              <iframe width="100%" height="315" src="https://www.youtube.com/embed/ZRP8McRifa8?si=6TBEIRlsrezrMjdZ"
+                title="YouTube video player" frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowfullscreen></iframe>
+            </div>
+          </div>
+        </div>
+        <div id="z3IbelM6Bxz1dzIS">
+          <div id="GvbAAtzKoJsK9GNx" style="display:grid;position:relative;">
+            <div id="V2DJ6oghlLZeU9sg" style="z-index:5;">
+              <div id="QdaROCOU5AaZQuzK" style="box-sizing:border-box;width:100%;height:100%;transform:rotate(0deg);">
+                <div id="lkjfu3RaFk3BLoZG"
+                  style="opacity:1.0;display:flex;box-sizing:border-box;flex-direction:column;justify-content:flex-start;width:100%;height:100%;">
+                  <p id="v6fVUkQeiGvDYdo6"
+                    style="color:#38b6ff;font-family:YAFdJr3SNlU-0;line-height:0.99415725em;text-align:center;text-transform:uppercase;-webkit-text-stroke:0.0375em rgb(56, 182, 255);-webkit-text-fill-color:transparent;">
+                    <span id="smougGB7ws9YYyPK" style="color:#38b6ff;font-weight:900;">Advertising</span>
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div id="erytrgF8gr2EjpM1" style="z-index:6;">
+              <div id="ll9ebY8LW6WxuM9B" style="box-sizing:border-box;width:100%;height:100%;transform:rotate(0deg);">
+                <div id="D23txo0hj4ayxys7"
+                  style="opacity:1.0;display:flex;box-sizing:border-box;flex-direction:column;justify-content:flex-start;width:100%;height:100%;">
+                  <p id="xo1Z2jg2zNJUv9Ef"
+                    style="color:#ededed;font-family:YAFdJr3SNlU-0;line-height:0.98665473em;text-align:center;text-transform:uppercase;">
+                    <span id="Yk57asaZPPmoMwez" style="color:#ededed;font-weight:900;">TV COMERCIALS</span>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="KfJIg8p2TrPH8xT3" style="z-index:7;">
+          <div id="UtUaM8VUk8mm1ZTr" style="box-sizing:border-box;width:100%;height:100%;transform:rotate(0deg);">
+            <div id="DB4xwSbh2WSVqF3a"
+              style="opacity:1.0;display:flex;box-sizing:border-box;flex-direction:column;justify-content:flex-start;width:100%;height:100%;">
+              <p id="sS4vclqzwDBTwSfP"
+                style="color:#ffffff;font-family:YAFdJsjyMsM-0;line-height:1.1875em;text-align:center;text-transform:uppercase;letter-spacing:0.1em;">
+                <span id="Epl946v9IRzwZiBU" style="color:#ffffff;font-weight:600;">music production, sound design and
+                  post-production for television commercials and advertising campaigns</span>
+              </p>
+              <p id="CnWO2ZbzSsGA5Yce"
+                style="color:#ffffff;font-family:YAFdJsjyMsM-0;line-height:1.1875em;text-align:center;text-transform:uppercase;letter-spacing:0.1em;">
+                <span id="OWc1UE22bTpvGxDS" style="color:#ffffff;font-weight:600;">at el jefe</span>
+                <br>
+              </p>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   </div>
